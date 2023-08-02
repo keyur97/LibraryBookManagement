@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Library</title>
+	<link rel="stylesheet " href="https://unpkg.com/boxicons@latest/css/boxicons.min.css ">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style2.css')}}">
+</head>
+<body>
+ <div class="container ">
+        <div class="left_sidebar">
+            <div class="close_hamburger_btn">
+                <i class='bx bx-x-circle'></i>
+            </div>
+            <div class="logo ">
+                <h2>Library</h2>
+            </div>
+            <div class="menu_items ">
+                <div class="menu_item active">
+                    <a href="{{ url_for('book') }}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="link_name">Books</span>
+                </a>
+                </div>
+                <div class="menu_item  ">
+                    <a href="{{ url_for('mycollection') }}">
+                    <i class='bx bx-file-blank'></i>
+                    <span class="link_name">My Collection</span>
+                </a>
+                </div>
+                {% if isAdmin == "true" %}
+                <div class="menu_item ">
+                    <a href="{{ url_for('users') }}">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">User List</span>
+                </a>
+                </div>
+                {% endif %}
+                <div class="menu_item ">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Logout</span>
+                      </a>
+                </div>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="left_right_sidebar_opener">
+                <div class="hamburger">
+                    <i class='bx bx-menu'></i>
+                </div>
+
+            </div>
+            <div class="main_navbar">
+                <div class="search_box">
+                    
+                </div>
+                <!-- <div class="dark_mode_icon" onclick="darkMode()">
+                    <i class='bx bx-moon'></i>
+                    <i class='bx bx-sun'></i>
+                </div> -->
+            </div>
+            <div class="menu_item_name_and_filter ">
+                <div class="menu_item_name">
+                    <h2>Book List</h2>
+                </div>
+                {% if isAdmin == "true" %}
+                <button class="btn" style="width: 150px;"><a href="{{ url_for('addbook') }}">Add Book</a></button>
+                {% endif %}
+            </div>
+            <div class="table">
+                <table>
+                    <tr style="align-content:center;">
+                        <th>ID</th>
+                        <th>Book Name</th>
+                        <th>Category</th>
+                        <th>Author</th>
+                        {% if isAdmin == "true" %}
+                        <th>Status</th>
+                        {% endif %}
+                        <th>Action</th>
+                    </tr>
+                    {% for book in booksdetails %}
+                    
+                    <tr role="row" class="odd" >
+                        {% if book.isActive == 0  %}
+                        <td class="counterCell"></td>
+                        <td style="text-decoration: line-through;">{{book.book_name}}</td>
+                        <td style="text-decoration: line-through;">{{book.category}}</td>
+                        <td style="text-decoration: line-through;">{{book.author}}</td>
+                        {% if isAdmin == "true" %}
+                        {% if book.status == 1 %}
+                        <td style="text-decoration: line-through;">Available</td>
+                        {% else %}
+                        <td style="text-decoration: line-through;">Not Available</td>
+                        {% endif %}
+                        {% endif %}
+                        {% else %}
+                        <td class="counterCell"></td>
+                        <td>{{book.book_name}}</td>
+                        <td>{{book.category}}</td>
+                        <td >{{book.author}}</td>
+                        {% if isAdmin == "true" %}
+                        {% if book.status == 1 %}
+                        <td >Available</td>
+                        {% else %}
+                        <td>Not Available</td>
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                        <td style="display:flex;">
+                            {% if book.isActive == 1  %}
+                            {% if isAdmin == "true" %}
+                            <a href="{{ url_for('addbook',bookId=book.id) }}">
+                                <i class='bx bxs-edit' style="font-size: 25px;"></i>
+                            </a>
+                            <a href="javascript:deleteBook('{{book.id}}')">
+                                <i class='bx bxs-trash' style="font-size: 25px;padding-left: 20px;padding-right: 20px;"></i>
+                            </a>
+                            {% endif %}
+                            {% if book.status == 1 %}
+                            <button class="btn"><a href="{{ url_for('bookborrow',bookId=book.id) }}">Borrow</a></button>
+                            {% endif %}
+                            {% endif %}
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}       
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='script.js')}}"></script>
+   
+
+</body>
+</html>

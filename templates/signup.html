@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Library</title>
+	<link rel="stylesheet " href="https://unpkg.com/boxicons@latest/css/boxicons.min.css ">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style2.css')}}">
+</head>
+<body>
+    <div class="container login">
+    <div class="form-container" >
+      <h1>Sign Up</h1>
+      <form action="/signup" method="POST">
+        {% if message%}
+                <h4 style="color: #000; text-align: center;">{{message}}</h4>
+                {% endif %}
+        <label for="new-username">Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="new-username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="new-email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="new-username">Phone Number</label>
+        <input type="tel" pattern="[0-9]{10}" id="phone" name="phone" required>
+        <label for="new-password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p style="color: #000;">Already have an account? <a href="{{ url_for('login') }}" >Login</a></p>
+    </div>
+  </div>
+ 
+</body>
+</html>

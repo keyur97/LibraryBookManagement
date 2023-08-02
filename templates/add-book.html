@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Library</title>
+	<link rel="stylesheet " href="https://unpkg.com/boxicons@latest/css/boxicons.min.css ">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style2.css')}}">
+</head>
+<body>
+ <div class="container ">
+        <div class="left_sidebar">
+            <div class="close_hamburger_btn">
+                <i class='bx bx-x-circle'></i>
+            </div>
+            <div class="logo ">
+                <h2>Library</h2>
+            </div>
+            <div class="menu_items ">
+                <div class="menu_item active">
+                    <a href="{{ url_for('book') }}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="link_name">Books</span>
+                </a>
+                </div>
+                <div class="menu_item  ">
+                    <a href="{{ url_for('mycollection') }}">
+                    <i class='bx bx-file-blank'></i>
+                    <span class="link_name">My Collection</span>
+                </a>
+                </div>
+                <div class="menu_item ">
+                    <a href="{{ url_for('users') }}">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">User List</span>
+                </a>
+                </div>
+                <div class="menu_item ">
+                    <a href="{{ url_for('logout') }}">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Logout</span>
+                      </a>
+                </div>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="left_right_sidebar_opener">
+                <div class="hamburger">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </div>
+            <div class="main_navbar">
+                <div class="search_box">
+                    
+                </div>
+                <!-- <div class="dark_mode_icon" onclick="darkMode()">
+                    <i class='bx bx-moon'></i>
+                    <i class='bx bx-sun'></i>
+                </div> -->
+            </div>
+            <div class="menu_item_name_and_filter ">
+                <div class="menu_item_name">
+                    <h2>Add Book</h2>
+                </div>
+            </div>
+            <form action="/addbook" method="POST">
+            <input type="hidden" class="form-control" id="bookId"name="bookId" value="{% if bookdata%}{{bookdata.id}}{%else%}{% endif %}">
+            <input type="hidden" class="form-control" id="isactive"name="isActive" value="{% if bookdata%}{{bookdata.isActive}}{%else%}{% endif %}">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Book Name</label>
+                    <input type="text" class="form-control" id="book_name"name="book_name" value="{% if bookdata%}{{bookdata.book_name}}{%else%}{% endif %}">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Category</label>
+                    <select name="category" id="category">
+                        <option value="Entrepreneur" >Entrepreneur</option>
+                        <option value="Education">Education</option>
+                        <option value="Comic">Comic</option>
+                        <option value="Encyclopedia">Encyclopedia</option>
+                        <option value="Sci-fi">Sci-fi</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="History">History</option>
+                        <option value="Poetry">Poetry</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Author</label>
+                    <input type="text" class="form-control" id="author" name="author" value="{% if bookdata%}{{bookdata.author}}{%else%}{% endif %}"> 
+                </div>
+            </div>
+            <br>
+            <input type="submit" class="btn" style="width: 150px;" value="Submit">
+        </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
